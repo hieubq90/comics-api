@@ -15,9 +15,23 @@ const genreContact = c.router({
     },
     summary: 'Get all genres',
   },
+  byId: {
+    method: 'GET',
+    path: '/genres/:gid',
+    pathParams: z.object({
+      gid: z.string(),
+    }),
+    responses: {
+      200: GetComicsResult,
+    },
+    query: z.object({
+      page: z.string().transform(Number).optional(),
+    }),
+    summary: 'get comics by genres',
+  },
 })
 
-const COMIC_STATUS_VALUES = ['Salmon', 'Tuna', 'Trout'] as const
+const COMIC_STATUS_VALUES = ['all', 'completed', 'ongoing'] as const
 const ComicStatus = z.enum(COMIC_STATUS_VALUES)
 
 const TOP_COMMICS_VALUES = ['', 'daily', 'weekly', 'monthly', 'chapter', 'follow', 'comment'] as const
@@ -26,7 +40,7 @@ const TopComicsType = z.enum(TOP_COMMICS_VALUES)
 const comicContact = c.router({
   suggest: {
     method: 'GET',
-    path: '/search-suggest',
+    path: '/comics/search-suggest',
     responses: {
       200: z.array(SuggestedItem),
     },
@@ -37,7 +51,7 @@ const comicContact = c.router({
   },
   search: {
     method: 'GET',
-    path: '/search',
+    path: '/comics/search',
     responses: {
       200: z.array(GetComicsResult),
     },
@@ -49,7 +63,7 @@ const comicContact = c.router({
   },
   recommend: {
     method: 'GET',
-    path: '/recommend-comics',
+    path: '/comics/recommend',
     responses: {
       200: z.array(Comic),
     },
@@ -57,7 +71,7 @@ const comicContact = c.router({
   },
   trending: {
     method: 'GET',
-    path: '/top',
+    path: '/comics/top',
     responses: {
       200: GetComicsResult,
     },
@@ -66,23 +80,9 @@ const comicContact = c.router({
     }),
     summary: 'get trending comics',
   },
-  byGenre: {
+  new: {
     method: 'GET',
-    path: '/genres/:genre_id',
-    pathParams: z.object({
-      genre_id: z.string(),
-    }),
-    responses: {
-      200: GetComicsResult,
-    },
-    query: z.object({
-      page: z.string().transform(Number).optional(),
-    }),
-    summary: 'get comics by genres',
-  },
-  newComics: {
-    method: 'GET',
-    path: '/new-comics',
+    path: '/comics/new',
     responses: {
       200: GetComicsResult,
     },
@@ -92,9 +92,9 @@ const comicContact = c.router({
     }),
     summary: 'get new comics',
   },
-  recentlyUpdateComics: {
+  recently: {
     method: 'GET',
-    path: '/recent-update-comics',
+    path: '/comics/recent',
     responses: {
       200: GetComicsResult,
     },
@@ -104,9 +104,9 @@ const comicContact = c.router({
     }),
     summary: 'get recently update comics',
   },
-  completedComics: {
+  completed: {
     method: 'GET',
-    path: '/completed-comics',
+    path: '/comics/completed',
     responses: {
       200: GetComicsResult,
     },
@@ -115,9 +115,9 @@ const comicContact = c.router({
     }),
     summary: 'get completed comics',
   },
-  topComics: {
+  top: {
     method: 'GET',
-    path: '/top/:top_type',
+    path: '/comics/top/:top_type',
     pathParams: z.object({
       top_type: TopComicsType,
     }),
@@ -127,7 +127,7 @@ const comicContact = c.router({
     query: z.object({
       page: z.string().transform(Number).optional(),
     }),
-    summary: 'get comics by genres',
+    summary: 'get top comics by type',
   },
   detail: {
     method: 'GET',
@@ -168,7 +168,10 @@ const comicContact = c.router({
   },
 })
 
-export const comicsApi = c.router({
-  genres: genreContact,
-  comics: comicContact,
-})
+export const contact = c.router(
+  {
+    genres: genreContact,
+    comics: comicContact,
+  },
+  { pathPrefix: '/api/v1', strictStatusCode: true }
+)
