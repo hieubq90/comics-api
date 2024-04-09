@@ -27,7 +27,7 @@ export class ComicsController {
     })
   }
 
-  @TsRestHandler(contact.comics.new)
+  @TsRestHandler(contact.comics.completed)
   async getCompletedComics() {
     return tsRestHandler(contact.comics.completed, async (args) => {
       const { query } = args
