@@ -411,7 +411,7 @@ export class BaseScraper {
     }
   }
 
-  public async getChapter(comicId: string, chapterId: number, _alias?: string): Promise<any> {
+  public async getChapter(comicId: string, chapterId: string, _alias?: string): Promise<any> {
     try {
       const [$, chapters] = await Promise.all([
         this.createRequest(`truyen-tranh/${comicId}/chapter/${chapterId}`),

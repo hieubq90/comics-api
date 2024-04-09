@@ -71,7 +71,7 @@ const comicContact = c.router({
   },
   trending: {
     method: 'GET',
-    path: '/comics/top',
+    path: '/comics/trending',
     responses: {
       200: GetComicsResult,
     },
@@ -126,6 +126,7 @@ const comicContact = c.router({
     },
     query: z.object({
       page: z.string().transform(Number).optional(),
+      status: ComicStatus.optional(),
     }),
     summary: 'get top comics by type',
   },

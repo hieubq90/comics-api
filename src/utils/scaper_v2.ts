@@ -184,7 +184,7 @@ class ScraperApiV2 extends BaseScraper {
     }
   }
 
-  public async getChapter(comicId: string, chapterId: number, alias: string): Promise<any> {
+  public async getChapter(comicId: string, chapterId: string, alias: string): Promise<any> {
     try {
       const url = alias
         ? `truyen-tranh/${comicId.split('-').slice(0, -1).join('-')}/${alias}/${chapterId}`
