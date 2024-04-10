@@ -18,6 +18,14 @@ export class ComicsController {
     })
   }
 
+  @TsRestHandler(contact.comics.recommend)
+  async getRecommendComics() {
+    return tsRestHandler(contact.comics.recommend, async () => {
+      const body = await this.comicsService.getRecommendComics()
+      return { status: 200, body }
+    })
+  }
+
   @TsRestHandler(contact.comics.new)
   async getNewComics() {
     return tsRestHandler(contact.comics.new, async (args) => {
