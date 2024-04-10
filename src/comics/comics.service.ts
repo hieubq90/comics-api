@@ -22,6 +22,22 @@ export class ComicsService {
     }
   }
 
+  async getRecommendComics(type: 'hot' | 'boy' | 'girl' = 'hot') {
+    try {
+      const sourceSetting = await getSourceSetting()
+      if (sourceSetting.mode === 1) {
+        ScaperV1.setSource(sourceSetting.source)
+        return await ScaperV1.getRecommendComics(type)
+      } else if (sourceSetting.mode === 2) {
+        ScaperV2.setSource(sourceSetting.source)
+        return await ScaperV2.getRecommendComics(type)
+      }
+      return {}
+    } catch (err) {
+      throw err
+    }
+  }
+
   async getNewComics(status?: Status, page?: number) {
     try {
       const sourceSetting = await getSourceSetting()
