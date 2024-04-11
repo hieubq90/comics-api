@@ -89,13 +89,13 @@ export class ComicsService {
         ScaperV2.setSource(sourceSetting.source)
         switch (topType) {
           case 'daily':
-            return await ScaperV1.getTopDailyComics(status, page)
+            return await ScaperV2.getTopDailyComics(status, page)
           case 'weekly':
-            return await ScaperV1.getTopWeeklyComics(status, page)
+            return await ScaperV2.getTopWeeklyComics(status, page)
           case 'monthly':
-            return await ScaperV1.getTopMonthlyComics(status, page)
+            return await ScaperV2.getTopMonthlyComics(status, page)
           default:
-            return await ScaperV1.getTopAllComics(status, page)
+            return await ScaperV2.getTopAllComics(status, page)
         }
       }
       return {}

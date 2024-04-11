@@ -24,6 +24,7 @@ export class BaseScraper {
   protected async createRequest(path: string): Promise<any> {
     try {
       const url = `${this.domain}/${path}`.replace(/\?+/g, '?')
+      console.log('url', url)
       const { data } = await axios.request({
         method: 'GET',
         url,
