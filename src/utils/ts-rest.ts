@@ -34,7 +34,7 @@ const genreContact = c.router({
 const COMIC_STATUS_VALUES = ['all', 'completed', 'ongoing'] as const
 const ComicStatus = z.enum(COMIC_STATUS_VALUES)
 
-const TOP_COMMICS_VALUES = ['', 'daily', 'weekly', 'monthly', 'chapter', 'follow', 'comment'] as const
+const TOP_COMMICS_VALUES = ['all', 'daily', 'weekly', 'monthly', 'chapter', 'follow', 'comment'] as const
 const TopComicsType = z.enum(TOP_COMMICS_VALUES)
 
 const comicContact = c.router({
