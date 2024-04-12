@@ -25,7 +25,7 @@ async function bootstrap() {
   })
 
   const CORS_OPTIONS = {
-    origin: ['http://localhost:3000', 'http://localhost:3001', 'https://doctruyen.hieubq.io.vn'],
+    origin: ['http://localhost:3000', 'http://localhost:3001', 'https://necomics.hieubq.io.vn'],
     allowedHeaders: [
       'Access-Control-Allow-Origin',
       'Origin',
